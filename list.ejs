@@ -1,0 +1,50 @@
+<%- include("header",{user:users.username})%>
+<div class="card text-bg-dark border border-0">
+  <img src="/images/wallpaperbetter.jpg" class="d-block w-100 img-fluid" style="max-height:580px;overflow:hidden;" width="100%">
+  <div class="card-img-overlay">
+    <button type="button" class="btn btn-light" style="float: right;" onclick="location.href ='/write/<%= users.username%>'">Wrtie Article</button>
+    <%if(users.qoute){%>
+    <img src="<%= users.profileIMG%>" class="rounded-circle"  width="150px" height="150px" alt="USER IMAGE">
+    <%}else{%>
+    <img src="/images/userdefault.png" class="rounded-circle"  width="150px" height="150px" alt="USER IMAGE">
+    <%}%>
+    <h5 style="padding-top:1%;" class="card-title fw-bold"><%= users.username%></h5>
+    <%if(users.qoute){%>
+    <p class="card-text fw-bold"><%=users.qoute%>"</p>
+    <%}else{%>
+    <p class="card-text fw-bold">Change your quote from profile settings</p>
+    <%}%>
+  </div>
+</div>
+
+<div class="container">
+
+</div>
+<div class="row">
+  <div class="col-9"><div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-3 d-flex">
+    <% if(contents.length!=0){ contents.forEach(function(blog){ %>
+            <div class="col">
+              <div class="card m-2" style="width:350px;">
+                <img src="<%= blog.thumbnail%>" class="card-img-top"
+                  alt="Hollywood Sign on The Hill" />
+                <div class="card-body">
+                <h5 class="card-title text-truncate"><%= blog.title %></h5>
+                <p class="card-text"><%= blog.content.substring(0,180)%>
+                <a class="btn btn-dark" href="">Read More</a>
+                <h6 class="fw-light" href=""><%= blog.username%></h6>
+                </p>
+                <%if(users.username==blog.username){%>
+                <form action="/delete" method='POST'>
+                  <button  class="btn btn-danger" type="submit" name="delete" value="<%= blog._id%>">Delete</button>
+                  </form>
+                  <%}%>
+                </div>
+              </div>
+            </div>
+    <%})}%>
+    </div></div>
+  <div class="col-3">
+  </div>
+</div>
+</div>
+<%- include("footer") -%>

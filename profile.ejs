@@ -1,0 +1,27 @@
+<%- include("header",{user:users})%>
+<script>
+    var loadFile = function(event) {
+      var output = document.getElementById('output');
+      output.src = URL.createObjectURL(event.target.files[0]);
+      output.onload = function() {
+        URL.revokeObjectURL(output.src)
+      }
+    };
+  </script>
+<div class="container border border-2 p-3">
+<form action='/profile/update/<%=users%>' method='POST' enctype="multipart/form-data">
+<%if(users){%>
+<img  src="<%= content[0].profileIMG%>" class="rounded-circle" id="output" width="200px" height="200px">
+<% } else{ %>  
+<img  src="/images/userdefault.png" class="rounded-circle" id="output" width="200px" height="200px">
+<% } %>
+<label for="formFileSm" class="form-label"><%= content[0].username%></label>
+<input class="form-control form-control-sm" id="formFileSm" type="file" accept="image/*" onchange="loadFile(event)" name="uploaded_file">
+<label for="exampleFormControlInput1" class="form-label">quotes</label>
+<input type="text" class="form-control" id="exampleFormControlInput1" placeholder="quotes" name="quotes" value="<%= content[0].qoute%>">
+<label for="exampleFormControlInput1" class="form-label">Contact</label>
+<input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Contact" name="Contact">
+<button class="btn btn-dark m-2" >Submit</button>
+</form>
+</div>
+<%- include("footer") -%>

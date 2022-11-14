@@ -1,0 +1,26 @@
+<%- include("header",{user:users.username})%>
+<div class="container-fluid">
+    <div class="card mb-3">
+        <img src="<%= contents[0].thumbnail%>" class="card-img-top" alt="..." width="60%" height="350px" style="object-fit: cover;">
+        <div class="card-body">
+          <h5 class="card-title"><%= contents[0].title %></h5>
+          <p class="card-text"><%= contents[0].content.substring(0,180)%></p>
+          <p class="card-text"><small class="text-muted"><%= contents.username%></small></p>
+        </div>
+      </div>
+<div class="col-9"><div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-3 d-flex">
+<% if(contents.length!=0){ contents.forEach(function(blog){ %>
+<div class="col">
+<div class="card m-2" style="width:350px;">
+<img src="<%= blog.thumbnail%>" class="card-img-top" alt="Hollywood Sign on The Hill" />
+<div class="card-body">
+<h5 class="card-title text-truncate"><%= blog.title %></h5>
+<p class="card-text"><%= blog.content.substring(0,180)%>
+<a class="btn btn-dark" href="/article/<%= blog._id%>">Read More</a>
+<h6 class="fw-light" style="cursor: pointer;" href=""><%= blog.username%></h6></p>
+</div>
+</div>
+</div>
+<%})}%></div></div>
+</div>
+<%- include("footer") -%>

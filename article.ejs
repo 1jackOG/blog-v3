@@ -1,0 +1,13 @@
+<%- include("header",{user:users.username})%>
+<div class="container">
+    <div class="container-fluid">
+        <div class="card mb-3">
+            <img src="<%= contents.thumbnail%>" class="card-img-top" alt="..." width="60%" height="350px" style="object-fit: cover;">
+            <div class="card-body">
+              <h5 class="card-title"><%= contents.title %></h5>
+              <p class="card-text"><%= contents.content.substring(0,180)%></p>
+              <a class="card-text" style="cursor: pointer;text-decoration: none;" href="/home/view/<%= contents.username%>"><small class="text-muted"><%= contents.username%></small></a>
+            </div>
+          </div>
+</div>
+<%- include("footer") -%>
